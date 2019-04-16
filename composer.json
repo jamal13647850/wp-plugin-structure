@@ -1,0 +1,17 @@
+{
+    "name": "pgsavis/wp-plugin-structure",
+    "description": "A structure for wordpress plugin",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Sayyed Jamal Ghasemi",
+            "email": "jamal13647850@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload" : {
+        "psr-4" :{
+            "jamal\\wpmstructure\\" : "src/"
+        }
+    }
+}
