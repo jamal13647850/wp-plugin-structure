@@ -6,7 +6,7 @@
  * Time: 11:22 AM
  */
 
-namespace safir\certificate;
+namespace jamal\wpmstructure;
 
 
 abstract class wpshortcodes

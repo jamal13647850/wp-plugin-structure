@@ -6,7 +6,7 @@
  * Time: 4:31 PM
  */
 
-namespace safir\certificate;
+namespace jamal\wpmstructure;
 
 
 use gosafir\twigExtension;
