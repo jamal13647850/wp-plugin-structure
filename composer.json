@@ -8,7 +8,7 @@
             "email": "jamal13647850@gmail.com"
         }
     ],
-    "require": {},
+    "require": {"twig/twig": "^2.7"},
     "autoload" : {
         "psr-4" :{
             "jamal\\wpmstructure\\" : "src/"
