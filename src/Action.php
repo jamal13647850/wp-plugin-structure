@@ -9,6 +9,6 @@
 namespace jamal\wpmstructure;
 class Action implements ActionBody {
     public function loadBody() {
-        echo "This is the main Email body.<br />";
+        
     }
 }

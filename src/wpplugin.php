@@ -9,7 +9,7 @@
 namespace jamal\wpmstructure;
 
 
-use gosafir\twigExtension;
+
 use Twig_Environment;
 use Twig_Extension_Debug;
 use Twig_Loader_Filesystem;
