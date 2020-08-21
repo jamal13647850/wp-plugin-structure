@@ -9,7 +9,7 @@
 namespace jamal\wpmstructure;
 
 
-
+require_once __DIR__ . '/../vendor/autoload.php';
 use Twig_Environment;
 use Twig_Extension_Debug;
 use Twig_Loader_Filesystem;
