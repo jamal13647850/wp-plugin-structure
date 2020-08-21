@@ -68,4 +68,12 @@ abstract class wpplugin
 
         return $twig;
     }
+
+    /**
+     * Get the value of domain
+     */ 
+    public function getDomain()
+    {
+        return $this->domain;
+    }
 }
