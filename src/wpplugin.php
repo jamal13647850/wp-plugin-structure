@@ -9,7 +9,8 @@
 namespace jamal\wpmstructure;
 
 
-require_once __DIR__ . '/../vendor/autoload.php';
+//require_once __DIR__ . '/../vendor/autoload.php';
+
 use Twig_Environment;
 use Twig_Extension_Debug;
 use Twig_Loader_Filesystem;
@@ -56,16 +57,18 @@ abstract class wpplugin
     abstract function deactivation();
 
     public function initTwig($dirs,$dirPath){
-        $loader = new Twig_Loader_Filesystem();
+        $loader = new \Twig\Loader\FilesystemLoader();
 
         foreach ($dirs as $dir){
             $loader->addPath($dirPath.$dir, $dir);
         }
 
-        $twig = new Twig_Environment($loader, array('debug' => true));
-        $twig->addExtension(new Twig_Extension_Debug());
+        $twig = new \Twig\Environment($loader, [
+            'debug' => true,
+        ]);
+        $twig->addExtension(new \Twig\Extension\DebugExtension());
+        
         //$twig->addExtension(new twigExtension());
-
         return $twig;
     }
 
