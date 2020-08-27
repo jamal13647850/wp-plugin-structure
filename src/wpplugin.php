@@ -17,17 +17,15 @@ use Twig_Loader_Filesystem;
 
 abstract class wpplugin
 {
-    private $domain,$LangsFilesPath;
+    private static $domain,$LangsFilesPath;
     public function __construct($domain,$LangsFilesPath='',$file){
 
         defined( 'ABSPATH' ) || exit;
-        $this->domain = $domain;
-        $this->LangsFilesPath = $domain;
-
-        if($LangsFilesPath==''){
-            $LangsFilesPath = dirname( plugin_basename( __FILE__ ) ) . '/langs/';
-        }
-        $this->loadPluginTextdomain($domain,$LangsFilesPath);
+        self::$domain = $domain;
+        self::$LangsFilesPath = $LangsFilesPath;
+        self::$LangsFilesPath = $LangsFilesPath==''??dirname( plugin_basename( __FILE__ ) ) . '/langs/';
+        
+        $this->loadPluginTextdomain($domain,self::$LangsFilesPath);
 
 
         add_action('wp_enqueue_scripts', array($this,'registerScriptsAndStyles'),1);
