@@ -23,11 +23,10 @@ abstract class wpplugin
         defined( 'ABSPATH' ) || exit;
         self::$domain = $domain;
         self::$LangsFilesPath = $LangsFilesPath;
-        self::$LangsFilesPath = $LangsFilesPath==''??dirname( plugin_basename( __FILE__ ) ) . '/langs/';
+        self::$LangsFilesPath = $LangsFilesPath==''?dirname( plugin_basename( $file ) ) . '/langs/':$LangsFilesPath;
         
         $this->loadPluginTextdomain($domain,self::$LangsFilesPath);
-
-
+        
         add_action('wp_enqueue_scripts', array($this,'registerScriptsAndStyles'),1);
         add_action( 'admin_enqueue_scripts', array($this,'registerAdminScriptsAndStyles'), 10000 );
         add_action( 'login_enqueue_scripts', [$this,'loginStylesheet'] );
@@ -73,8 +72,8 @@ abstract class wpplugin
     /**
      * Get the value of domain
      */ 
-    public function getDomain()
+    public static function getDomain()
     {
-        return $this->domain;
+        return self::$domain;
     }
 }
