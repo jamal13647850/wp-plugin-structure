@@ -17,11 +17,13 @@ use Twig_Loader_Filesystem;
 
 abstract class wpplugin
 {
-    private static $domain,$LangsFilesPath;
-    public function __construct($domain,$LangsFilesPath='',$file){
+    private static $domain,$LangsFilesPath,$mode;
+    
+    public function __construct($domain,$LangsFilesPath='',$file,$mode){
 
         defined( 'ABSPATH' ) || exit;
         self::$domain = $domain;
+        self::$mode = $mode;
         self::$LangsFilesPath = $LangsFilesPath;
         self::$LangsFilesPath = $LangsFilesPath==''?dirname( plugin_basename( $file ) ) . '/langs/':$LangsFilesPath;
         
@@ -75,5 +77,13 @@ abstract class wpplugin
     public static function getDomain()
     {
         return self::$domain;
+    }
+
+    /**
+     * Get the value of mode
+     */ 
+    public static function getMode()
+    {
+        return self::$mode;
     }
 }
