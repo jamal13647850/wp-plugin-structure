@@ -19,7 +19,7 @@ abstract class wpplugin
 {
     private static $domain,$LangsFilesPath,$mode;
     
-    public function __construct($domain,$LangsFilesPath='',$file,$mode){
+    public function __construct($domain,$file,$mode,$LangsFilesPath=''){
 
         defined( 'ABSPATH' ) || exit;
         self::$domain = $domain;

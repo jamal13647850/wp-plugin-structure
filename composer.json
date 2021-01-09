@@ -15,5 +15,8 @@
         "psr-4" :{
             "jamal\\wpmstructure\\" : "src/"
         }
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "*"
     }
 }
