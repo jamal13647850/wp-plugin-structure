@@ -25,7 +25,7 @@ abstract class wpshortcodes
          add_shortcode($this->tag,array($this,'mainFunction'));
      }
     //add_shortcode('safircode',array($this,'safirCodeFunc'));
-    abstract function mainFunction($atts);
+    abstract function mainFunction($atts, $content, $tag);
     /*function mainFunction($atts) {
         $a = shortcode_atts(array(
             'form' => ''
