@@ -200,7 +200,7 @@ class loadAssets
                 $this->jsList[$key]['in_footer']
             );
             wp_localize_script(
-                [$key]['handle'],
+                $this->jsList[$key]['handle'],
                 $this->domain,
                 apply_filters("jampluginl10n", ['ajaxurl' => admin_url('admin-ajax.php', (is_ssl() ? 'https' : 'http'))])
             );
