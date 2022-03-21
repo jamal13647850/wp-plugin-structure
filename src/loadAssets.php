@@ -16,7 +16,7 @@ class loadAssets
     private string $jsPath;
 
 
-    public function __construct(string $mode, string $cssPath, string $jsPath,string $domain)
+    public function __construct(string $mode, string $cssPath, string $jsPath, string $domain)
     {
         $this->mode = $mode;
         $this->cssPath = $cssPath;
@@ -199,6 +199,11 @@ class loadAssets
                 $this->jsList[$key]['ver'],
                 $this->jsList[$key]['in_footer']
             );
+            wp_localize_script(
+                [$key]['handle'],
+                $this->domain,
+                apply_filters("jampluginl10n", ['ajaxurl' => admin_url('admin-ajax.php', (is_ssl() ? 'https' : 'http'))])
+            );
         }
     }
 
@@ -211,20 +216,20 @@ class loadAssets
                 case "development":
 
                     if (is_rtl()) {
-                        $assets[$key]['handle'] = $key . '-rtl'.'-'.$this->domain;
+                        $assets[$key]['handle'] = $key . '-rtl' . '-' . $this->domain;
                         $assets[$key]['src'] = $key . '-rtl';
                     } else {
-                        $assets[$key]['handle'] = $key . '-ltr'.'-'.$this->domain;
+                        $assets[$key]['handle'] = $key . '-ltr' . '-' . $this->domain;
                         $assets[$key]['src'] = $key . '-ltr';
                     }
 
                     break;
                 case "production":
                     if (is_rtl()) {
-                        $assets[$key]['handle'] = $key . '-rtl-min'.'-'.$this->domain;
+                        $assets[$key]['handle'] = $key . '-rtl-min' . '-' . $this->domain;
                         $assets[$key]['src'] = $key . '-rtl.min';
                     } else {
-                        $assets[$key]['handle'] = $key . '-ltr-min'.'-'.$this->domain;
+                        $assets[$key]['handle'] = $key . '-ltr-min' . '-' . $this->domain;
                         $assets[$key]['src'] = $key . '-ltr.min';
                     }
 
