@@ -12,7 +12,7 @@ namespace jamal\wpmstructure;
 abstract class wpshortcodes
 {
     protected $tag;
-    public function __construct($tag){
+    public function __construct($atts, $content, $tag){
         $this->tag=$tag;
         $this->Register();
     }
