@@ -12,7 +12,7 @@ namespace jamal\wpmstructure;
 abstract class wpshortcodes
 {
     protected $tag;
-    public function __construct($atts, $content, $tag){
+    public function __construct($tag){
         $this->tag=$tag;
         $this->Register();
     }
@@ -25,7 +25,7 @@ abstract class wpshortcodes
          add_shortcode($this->tag,array($this,'mainFunction'));
      }
     //add_shortcode('safircode',array($this,'safirCodeFunc'));
-    abstract function mainFunction($atts, $content, $tag);
+    abstract function mainFunction($atts, $content);
     /*function mainFunction($atts) {
         $a = shortcode_atts(array(
             'form' => ''
