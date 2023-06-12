@@ -112,6 +112,8 @@ class loadAssets
             );
             wp_enqueue_style($this->cssList[$key]['handle']);
         }
+
+        return $this;
     }
     public function LoadScripts()
     {
@@ -206,6 +208,8 @@ class loadAssets
                 apply_filters("jampluginl10n", ['ajaxurl' => admin_url('admin-ajax.php', (is_ssl() ? 'https' : 'http'))])
             );
         }
+
+        return $this;
     }
 
     private function createAssetsNames(array $assets): array
