@@ -14,6 +14,7 @@ class loadAssets
     private string $mode;
     private string $cssPath;
     private string $jsPath;
+    private string $domain;
 
 
     public function __construct(string $mode, string $cssPath, string $jsPath, string $domain)
