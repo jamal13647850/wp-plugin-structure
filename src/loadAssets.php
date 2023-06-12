@@ -28,7 +28,7 @@ class loadAssets
     public function LoadStyle()
     {
 
-        $this->cssList = apply_filters("jamplugincssList", [
+        $this->cssList = apply_filters($this->domain."cssList", [
             'admin-core' => [
                 'handle' => '',
                 'src' => '',
@@ -115,7 +115,7 @@ class loadAssets
     }
     public function LoadScripts()
     {
-        $this->jsList = apply_filters("jampluginjsList", [
+        $this->jsList = apply_filters($this->domain."jsList", [
             'admin-core' => [
                 'handle' => '',
                 'src' => '',

@@ -17,18 +17,18 @@ use Twig_Loader_Filesystem;
 
 abstract class wpplugin
 {
-    private static $domain, $LangsFilesPath, $mode;
+    private $domain, $LangsFilesPath, $mode;
 
     public function __construct($domain, $file, $mode, $LangsFilesPath = '')
     {
 
         defined('ABSPATH') || exit;
-        self::$domain = $domain;
-        self::$mode = $mode;
-        self::$LangsFilesPath = $LangsFilesPath;
-        self::$LangsFilesPath = $LangsFilesPath == '' ? dirname(plugin_basename($file)) . '/langs/' : $LangsFilesPath;
+        $this->domain = $domain;
+        $this->mode = $mode;
+        $this->LangsFilesPath = $LangsFilesPath;
+        $this->LangsFilesPath = $LangsFilesPath == '' ? dirname(plugin_basename($file)) . '/langs/' : $LangsFilesPath;
 
-        $this->loadPluginTextdomain($domain, self::$LangsFilesPath);
+        $this->loadPluginTextdomain($domain, $this->LangsFilesPath);
 
         add_action('wp_enqueue_scripts', array($this, 'registerScriptsAndStyles'), 1);
         add_action('admin_enqueue_scripts', array($this, 'registerAdminScriptsAndStyles'), 10000);
@@ -78,16 +78,16 @@ abstract class wpplugin
     /**
      * Get the value of domain
      */
-    public static function getDomain()
+    public function getDomain()
     {
-        return self::$domain;
+        return $this->domain;
     }
 
     /**
      * Get the value of mode
      */
-    public static function getMode()
+    public function getMode()
     {
-        return self::$mode;
+        return $this->mode;
     }
 }
