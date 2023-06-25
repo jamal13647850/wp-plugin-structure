@@ -71,6 +71,8 @@ class loadAssets
             wp_enqueue_style($this->cssList[$key]['handle']);
         }
 
+        $this->LoadStyleOnSpecificPage();
+
         return $this;
     }
     public function LoadScripts()
@@ -103,6 +105,8 @@ class loadAssets
                 apply_filters("jampluginl10n", ['ajaxurl' => admin_url('admin-ajax.php', (is_ssl() ? 'https' : 'http'))])
             );
         }
+
+        $this->LoadScriptsOnSpecificPage();
 
         return $this;
     }
@@ -158,7 +162,7 @@ class loadAssets
 
 
 
-    public function LoadScriptsOnSpecificPage():\jamal\wpmstructure\loadAssets{
+    private function LoadScriptsOnSpecificPage():\jamal\wpmstructure\loadAssets{
 
         
         $this->conditionalJsList = $this->addType($this->createAssetsNames($this->conditionalJsList), 'js');
@@ -184,7 +188,7 @@ class loadAssets
         return $this;
     }
 
-    public function LoadStyleOnSpecificPage()
+    private function LoadStyleOnSpecificPage()
     {
 
         
