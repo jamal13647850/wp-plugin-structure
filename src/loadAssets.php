@@ -6,11 +6,27 @@ namespace jamal\wpmstructure;
 
 defined('ABSPATH') || exit();
 
+enum Media:string
+{
+    case all='all';
+    case size280='only screen and (min-width: 280px) and (max-width: 480px)';
+    case size481='only screen and (min-width: 481px) and (max-width: 768px)';
+    case size769='only screen and (min-width: 769px) and (max-width: 1024px)';
+    case size1025='only screen and (min-width: 1025px) and (max-width: 1200px)';
+    case size1201='only screen and (min-width: 1201px)  and (max-width: 1823px)';
+    case size1824='only screen and (min-width: 1824px)';
+    case handheld='handheld';
+    case print='print';
+  
+}
 
 class loadAssets
 {
     private array $cssList;
     private array $jsList;
+
+    private array $conditionalCssList;
+    private array $conditionalJsList;
     private string $mode;
     private string $cssPath;
     private string $jsPath;
@@ -23,84 +39,26 @@ class loadAssets
         $this->cssPath = $cssPath;
         $this->jsPath = $jsPath;
         $this->domain = $domain;
+
+        $this->jsList=[];
+        $this->cssList=[];
+
+        $this->conditionalCssList=[];
+        $this->conditionalJsList=[];
+
     }
 
     public function LoadStyle()
     {
 
-        $this->cssList = apply_filters($this->domain."cssList", [
-            'admin-core' => [
-                'handle' => '',
-                'src' => '',
-                'deps' => [],
-                'ver' => false,
-                'media' => 'all'
-            ],
-            'home-280' => [
-                'handle' => '',
-                'src' => '',
-                'deps' => [],
-                'ver' => false,
-                'media' => 'only screen and (min-width: 280px) and (max-width: 480px)'
-            ],
-            'home-481' => [
-                'handle' => '',
-                'src' => '',
-                'deps' => [],
-                'ver' => false,
-                'media' => 'only screen and (min-width: 481px) and (max-width: 768px)'
-            ],
-            'home-769' => [
-                'handle' => '',
-                'src' => '',
-                'deps' => [],
-                'ver' => false,
-                'media' => 'only screen and (min-width: 769px) and (max-width: 1024px)'
-            ],
-            'home-1025' => [
-                'handle' => '',
-                'src' => '',
-                'deps' => [],
-                'ver' => false,
-                'media' => 'only screen and (min-width: 1025px) and (max-width: 1200px)'
-            ],
-            'home-1201' => [
-                'handle' => '',
-                'src' => '',
-                'deps' => [],
-                'ver' => false,
-                'media' => 'only screen and (min-width: 1201px)  and (max-width: 1823px)'
-            ],
-            'home-1824' => [
-                'handle' => '',
-                'src' => '',
-                'deps' => [],
-                'ver' => false,
-                'media' => 'only screen and (min-width: 1824px)'
-            ],
-            'home-core' => [
-                'handle' => '',
-                'src' => '',
-                'deps' => [],
-                'ver' => false,
-                'media' => 'all'
-            ],
-            'home-handheld' => [
-                'handle' => '',
-                'src' => '',
-                'deps' => [],
-                'ver' => false,
-                'media' => 'handheld'
-            ],
-            'home-print' => [
-                'handle' => '',
-                'src' => '',
-                'deps' => [],
-                'ver' => false,
-                'media' => 'print'
-            ]
-        ]);
-
+        // $this->cssList = [
+        //     'admin-core' => [
+        //         'handle' => '',
+        //         'src' => '',
+        //         'deps' => [],
+        //         'ver' => false,
+        //         'media' => 'all'
+        //     ],
         $this->cssList = $this->addType($this->createAssetsNames($this->cssList), 'css');
         foreach ($this->cssList as $key => $css) {
             wp_register_style(
@@ -117,78 +75,15 @@ class loadAssets
     }
     public function LoadScripts()
     {
-        $this->jsList = apply_filters($this->domain."jsList", [
-            'admin-core' => [
-                'handle' => '',
-                'src' => '',
-                'deps' => [],
-                'ver' => false,
-                'in_footer' => true
-            ],
-            'home-280' => [
-                'handle' => '',
-                'src' => '',
-                'deps' => [],
-                'ver' => false,
-                'in_footer' => true
-            ],
-            'home-481' => [
-                'handle' => '',
-                'src' => '',
-                'deps' => [],
-                'ver' => false,
-                'in_footer' => true
-            ],
-            'home-769' => [
-                'handle' => '',
-                'src' => '',
-                'deps' => [],
-                'ver' => false,
-                'in_footer' => true
-            ],
-            'home-1025' => [
-                'handle' => '',
-                'src' => '',
-                'deps' => [],
-                'ver' => false,
-                'in_footer' => true
-            ],
-            'home-1201' => [
-                'handle' => '',
-                'src' => '',
-                'deps' => [],
-                'ver' => false,
-                'in_footer' => true
-            ],
-            'home-1824' => [
-                'handle' => '',
-                'src' => '',
-                'deps' => [],
-                'ver' => false,
-                'in_footer' => true
-            ],
-            'home-core' => [
-                'handle' => '',
-                'src' => '',
-                'deps' => [],
-                'ver' => false,
-                'in_footer' => true
-            ],
-            'home-handheld' => [
-                'handle' => '',
-                'src' => '',
-                'deps' => [],
-                'ver' => false,
-                'in_footer' => true
-            ],
-            'home-print' => [
-                'handle' => '',
-                'src' => '',
-                'deps' => [],
-                'ver' => false,
-                'in_footer' => true
-            ]
-        ]);
+        // $this->jsList =  [
+        //     'admin-core' => [
+        //         'handle' => '',
+        //         'src' => '',
+        //         'deps' => [],
+        //         'ver' => false,
+        //         'in_footer' => true
+        //     ],
+        //   ]
 
 
 
@@ -211,7 +106,7 @@ class loadAssets
 
         return $this;
     }
-
+    
     private function createAssetsNames(array $assets): array
     {
 
@@ -259,5 +154,105 @@ class loadAssets
             $assetList[$key]['src'] = $path . $assetList[$key]['src'];
         }
         return $assetList;
+    }
+
+
+
+    public function LoadScriptsOnSpecificPage():\jamal\wpmstructure\loadAssets{
+
+        
+        $this->conditionalJsList = $this->addType($this->createAssetsNames($this->conditionalJsList), 'js');
+
+        foreach ( $this->conditionalJsList as $key => $js) {
+            if (is_page($this->conditionalJsList[$key]['loadOn'])) { 
+                wp_enqueue_script(
+                    $this->conditionalJsList[$key]['handle'],
+                    $this->jsPath .  $this->conditionalJsList[$key]['src'],
+                    $this->conditionalJsList[$key]['deps'],
+                    $this->conditionalJsList[$key]['ver'],
+                    $this->conditionalJsList[$key]['in_footer']
+                );
+                wp_localize_script(
+                    $this->conditionalJsList[$key]['handle'],
+                    $this->domain,
+                    apply_filters($this->domain."cjslocal", ['ajaxurl' => admin_url('admin-ajax.php', (is_ssl() ? 'https' : 'http'))])
+                );
+            }
+            
+        }
+
+        return $this;
+    }
+
+    public function LoadStyleOnSpecificPage()
+    {
+
+        
+
+        $this->conditionalCssList = $this->addType($this->createAssetsNames($this->conditionalCssList), 'css');
+        foreach ($this->conditionalCssList as $key => $css) {
+            if (is_page($this->conditionalCssList[$key]['loadOn'])) { 
+                wp_register_style(
+                    $this->conditionalCssList[$key]['handle'],
+                    $this->cssPath . $this->conditionalCssList[$key]['src'],
+                    $this->conditionalCssList[$key]['deps'],
+                    $this->conditionalCssList[$key]['ver'],
+                    $this->conditionalCssList[$key]['media']
+                );
+                wp_enqueue_style($this->conditionalCssList[$key]['handle']);
+            }
+            
+        }
+
+        return $this;
+    }
+
+    /**
+    * @param int|string|int[]|string[] $page Optional. Page ID, title, slug, or array of such
+    *                                        to check against. Default empty.
+    * @param array $deps
+    */
+    public function addJSForSpecificPage(string $name,$loadOn = '',array $deps=[],bool $ver=false,bool $in_footer=true):void{
+        $this->conditionalJsList=array_merge($this->conditionalJsList,[$name => [
+            'handle' => '',
+            'src' => '',
+            'deps' => $deps,
+            'ver' => $ver,
+            'in_footer' => $in_footer,
+            'loadOn'=>$loadOn 
+        ]]);
+    }
+
+    public function addCSSForSpecificPage(string $name,$loadOn = '',Media $media=Media::all,array $deps=[],bool $ver=false):void{
+        $this->conditionalCssList=array_merge($this->conditionalCssList,[$name => [
+            'handle' => '',
+            'src' => '',
+            'deps' => $deps,
+            'ver' => $ver,
+            'media' =>  $media->value,
+            'loadOn'=>$loadOn 
+        ]]);
+    }
+
+
+
+    public function addJS(string $name,array $deps=[],bool $ver=false,bool $in_footer=true):void{
+        $this->jsList=array_merge($this->jsList,[$name => [
+            'handle' => '',
+            'src' => '',
+            'deps' => $deps,
+            'ver' => $ver,
+            'in_footer' => $in_footer
+        ]]);
+    }
+
+    public function addCSS(string $name,Media $media=Media::all,array $deps=[],bool $ver=false):void{
+        $this->cssList=array_merge($this->cssList,[$name => [
+            'handle' => '',
+            'src' => '',
+            'deps' => $deps,
+            'ver' => $ver,
+            'media' =>  $media->value
+        ]]);
     }
 }
