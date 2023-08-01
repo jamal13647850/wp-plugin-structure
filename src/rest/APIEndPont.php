@@ -38,9 +38,10 @@ abstract class APIEndPont implements RegisterRestRouteInterface{
         
     }
 
-    public function addMiddleWare(APIMiddleWareInterface $middleware): void
+    public function addMiddleWare(APIMiddleWareInterface $middleware):APIEndPont
     {
         $this->middleWares[]=$middleware;
+        return $this;
     }
 
     abstract public function endPointHandler($request):\WP_REST_Response;
@@ -48,22 +49,7 @@ abstract class APIEndPont implements RegisterRestRouteInterface{
     {
         register_rest_route($this->nameSpace, $this->route, array(
             'methods'  => $this->methods,
-            'callback' => [$this, 'callback'],
-            // 'permission_callback' => function() {
-            //     // Check if the request comes from the 'dashboard.example.com' domain
-            //     $referrer_host = parse_url(wp_get_raw_referer(), PHP_URL_HOST);
-            //     if ($referrer_host !== 'dashboard.example.com') {
-            //         return new \WP_Error('invalid_referer', 'Invalid referrer domain.', array('status' => 403));
-            //     }
-    
-            //     // Check if the requester's IP is 98.67.56.87
-            //     $requester_ip = $_SERVER['REMOTE_ADDR'];
-            //     if ($requester_ip !== '98.67.56.87') {
-            //         return new \WP_Error('invalid_ip', 'Access denied for your IP.', array('status' => 403));
-            //     }
-    
-            //     return true;
-            // },
+            'callback' => [$this, 'callback']
         ));
     }
 
