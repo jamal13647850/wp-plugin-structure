@@ -23,8 +23,10 @@ abstract class APIEndPont implements RegisterRestRouteInterface{
 
 
     public function callback($request){
-        foreach($this->middleWares as $middleWare){
-            return $middleWare->handle($request);
+        if(!empty($this->middleWares)){
+            foreach($this->middleWares as $middleWare){
+                return $middleWare->handle($request);
+            }
         }
         
         return $this->endPointHandler($request);
