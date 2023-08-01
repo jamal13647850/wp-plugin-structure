@@ -25,7 +25,12 @@ abstract class APIEndPont implements RegisterRestRouteInterface{
     public function callback($request){
         if(!empty($this->middleWares)){
             foreach($this->middleWares as $middleWare){
-                return $middleWare->handle($request);
+                $result= $middleWare->handle($request);
+                if($result instanceof \WP_REST_Request) {
+                    continue;
+                } else {
+                    return $result;
+                }
             }
         }
         
