@@ -13,7 +13,8 @@
     },
     "autoload" : {
         "psr-4" :{
-            "jamal\\wpmstructure\\" : "src/"
+            "jamal\\wpmstructure\\" : "src/",
+            "jamal\\wpmstructure\\rest\\" : "src/rest/"
         }
     },
     "require-dev": {
