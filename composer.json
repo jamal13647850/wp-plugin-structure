@@ -9,7 +9,7 @@
         }
     ],
     "require": {
-        "twig/twig": "^3.0"
+        "twig/twig": "^3.7"
     },
     "autoload" : {
         "psr-4" :{
